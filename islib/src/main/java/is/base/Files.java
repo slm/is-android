@@ -1,8 +1,12 @@
-package is.check;
+package is.base;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.StatFs;
+import android.text.TextUtils;
+import android.webkit.MimeTypeMap;
 
 import java.io.File;
 
@@ -11,10 +15,10 @@ import is.BaseCheck;
 /**
  * Created by slmyldz on 22.12.2015.
  */
-public class Space extends BaseCheck {
+public class Files extends BaseCheck {
 
 
-    public Space(Context context) {
+    public Files(Context context) {
         super(context);
     }
 
@@ -69,6 +73,61 @@ public class Space extends BaseCheck {
     public  boolean isAvailableSpace(int bytes){
         return getAvailableSpaceInBytes()>bytes;
     }
+
+    /**
+     * @return boolean
+     */
+    public static boolean isSdCardMounted() {
+        String status = Environment.getExternalStorageState();
+
+        if (status.equals(Environment.MEDIA_MOUNTED))
+            return true;
+
+        return false;
+    }
+
+    /**
+     * @param uri
+     * @return String type like that image/jpeg
+     */
+    public String getMediaType(Uri uri) {
+        ContentResolver cR = context.getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        String type = mime.getExtensionFromMimeType(cR.getType(uri));
+        return type;
+    }
+
+    /**
+     * @param filePath
+     * @param fileName
+     * @return
+     */
+    public static boolean isFileExistsInSDCard(String filePath, String fileName) {
+        boolean flag = false;
+        if (isSdCardMounted()) {
+            File file = new File(filePath, fileName);
+            if (file.exists()) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * @param directoryPath
+     * @return
+     */
+    public static boolean isFolderExist(String directoryPath) {
+        if (TextUtils.isEmpty(directoryPath)) {
+            return false;
+        }
+        File dire = new File(directoryPath);
+        return (dire.exists() && dire.isDirectory());
+    }
+
+
+
+
 
 
 }

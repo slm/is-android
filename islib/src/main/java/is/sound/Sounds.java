@@ -2,6 +2,7 @@ package is.sound;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.provider.Settings;
 
 import is.BaseCheck;
 
@@ -51,6 +52,23 @@ public class Sounds extends BaseCheck {
         AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         return audioManager.getStreamVolume(streamType)==audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
     }
+
+    /**
+     * @return int
+     */
+    public int getMediaVolume() {
+        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        return audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+    }
+
+    /**
+     * @return int
+     */
+    public int getRingVolume() {
+        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        return audioManager.getStreamVolume(AudioManager.STREAM_RING);
+    }
+
 
 
 }

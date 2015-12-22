@@ -2,8 +2,6 @@ package is;
 
 import android.app.Application;
 
-import is.check.Applications;
-
 /**
  * Created by slmyldz on 22.12.2015.
  */

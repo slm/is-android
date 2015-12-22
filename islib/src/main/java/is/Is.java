@@ -2,12 +2,12 @@ package is;
 
 import android.content.Context;
 
-import is.check.Applications;
-import is.check.Basics;
-import is.check.Keyboard;
-import is.check.Locations;
-import is.check.Screen;
-import is.check.Space;
+import is.base.Applications;
+import is.base.Basics;
+import is.base.Keyboard;
+import is.base.Locations;
+import is.base.Screen;
+import is.base.Files;
 import is.hardware.Phones;
 import is.network.Network;
 import is.runtime.Services;
@@ -29,7 +29,7 @@ public class Is {
     Keyboard keyboard;
     Locations locations;
     Screen screen;
-    Space space;
+    Files space;
     Phones phones;
     Network network;
     Services services;
@@ -42,7 +42,7 @@ public class Is {
         basics = new Basics(context);
         locations = new Locations(context);
         screen = new Screen(context);
-        space = new Space(context);
+        space = new Files(context);
         phones = new Phones(context);
         network = new Network(context);
         services = new Services(context);
@@ -71,7 +71,7 @@ public class Is {
         return screen;
     }
 
-    public Space getSpace() {
+    public Files getSpace() {
         return space;
     }
 

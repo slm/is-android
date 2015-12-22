@@ -2,6 +2,7 @@ package is.hardware;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +11,19 @@ import android.content.res.Configuration;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Debug;
+import android.os.Environment;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Pattern;
 
 import is.BaseCheck;
 
@@ -125,5 +133,81 @@ public class Phones extends BaseCheck{
         }
 
     }
+
+    /**
+     *
+     * @return OS Version
+     */
+    public static String getOsVersion() {
+        return Build.VERSION.RELEASE;
+    }
+
+    /**
+     *
+     * @return device IMEI as string
+     */
+    public static String getDeviceImei(Context ctx) {
+        TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getDeviceId();
+    }
+
+    /**
+     * @return getBluetoothState
+     * @throws Exception
+     */
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
+    public static int getBluetoothState() throws Exception {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter
+                .getDefaultAdapter();
+        if (bluetoothAdapter == null) {
+            throw new Exception("bluetooth device not found!");
+        } else {
+            return bluetoothAdapter.getState();
+        }
+    }
+
+    /**
+     * @return isBluetoothOpen
+     * @throws Exception
+     */
+    public static boolean isBluetoothOpen() throws Exception {
+        int bluetoothStateCode = getBluetoothState();
+        return bluetoothStateCode == BluetoothAdapter.STATE_ON
+                || bluetoothStateCode == BluetoothAdapter.STATE_TURNING_ON ? true
+                : false;
+    }
+
+
+    /**
+     * WRITE_APN_SETTING
+     * @return int
+     */
+    public int getAirplaneModeState() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return Settings.System.getInt(context.getContentResolver(),
+                    Settings.System.AIRPLANE_MODE_ON, 0);
+        } else {
+            return Settings.Global.getInt(context.getContentResolver(),
+                    Settings.Global.AIRPLANE_MODE_ON, 0);
+        }
+    }
+
+    /**
+     * @return true or false
+     */
+    public boolean isAirplaneModeOpen() {
+        return getAirplaneModeState() == 1 ? true : false;
+    }
+
+    /**
+     * @return long max memory
+     */
+    public static long getMaxMemory() {
+
+        return Runtime.getRuntime().maxMemory() / 1024;
+    }
+
+
+
 
 }

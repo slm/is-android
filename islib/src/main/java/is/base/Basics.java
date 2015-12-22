@@ -1,4 +1,4 @@
-package is.check;
+package is.base;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.util.Patterns;
 import java.io.File;
 
 import is.BaseCheck;
-import is.hardware.Phones;
 
 /**
  * Created by slmyldz on 22.12.2015.
@@ -135,5 +134,7 @@ public class Basics extends BaseCheck {
             }
         return false;
     }
+
+
 
 }

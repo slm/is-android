@@ -51,7 +51,7 @@ public class Views extends BaseCheck {
      * @param view
      * @return
      */
-    public boolean isEmpty(TextView view){
+    public static boolean isEmpty(TextView view){
         return view.getText().length()>0;
     }
 
@@ -76,6 +76,14 @@ public class Views extends BaseCheck {
         }else{
             return false;
         }
+    }
+
+    /**
+     * @param fragment
+     * @return boolean
+     */
+    public static boolean isFragmentAttached(Fragment fragment) {
+        return fragment.getActivity() != null;
     }
 
 

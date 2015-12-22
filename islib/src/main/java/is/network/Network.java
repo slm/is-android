@@ -72,6 +72,26 @@ public class Network extends BaseCheck {
         return  cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
     }
 
+    /**
+     *
+     *
+     * @return ConnectivityManager.TYPE_*
+     */
+    public static int getDataConnectionType(Context ctx) {
+
+        ConnectivityManager connMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connMgr != null && connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE) != null) {
+            if (connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected()) {
+                return ConnectivityManager.TYPE_MOBILE;
+            } else if (connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
+                return ConnectivityManager.TYPE_WIFI;
+            } else
+                return -1;
+        } else
+            return -1;
+    }
+
 
 
 

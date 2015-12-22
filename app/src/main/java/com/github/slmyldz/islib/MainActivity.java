@@ -9,10 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.io.File;
-
 import is.Is;
 import is.IsApplication;
+
 
 public class MainActivity extends AppCompatActivity {
     TextView text;
@@ -26,12 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    Is is;
     Is getIs(){
-        if(is ==null){
-            is = new Is(this);
-        }
-       return is;
+       return  ((IsApplication)getApplication()).getIs();
     }
 
 
