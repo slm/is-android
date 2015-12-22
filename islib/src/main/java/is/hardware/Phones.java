@@ -1,0 +1,129 @@
+package is.hardware;
+
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.res.Configuration;
+import android.os.BatteryManager;
+import android.os.Build;
+import android.os.Debug;
+import android.provider.Settings;
+import android.util.DisplayMetrics;
+import android.util.Log;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import is.BaseCheck;
+
+/**
+ * Created by slmyldz on 22.12.2015.
+ */
+public class Phones extends BaseCheck{
+
+
+    public Phones(Context context) {
+        super(context);
+    }
+
+    /**
+     * Check phone brand
+     * @param brandName
+     * @return
+     */
+    public boolean isBrand(String brandName){
+        return  android.os.Build.MANUFACTURER.contains(brandName);
+    }
+
+    /**
+     * thanks to http://stackoverflow.com/a/9624844/4630627
+     * Checks if the device is a tablet or a phone
+     *
+     * @param activityContext
+     *            The Activity Context.
+     * @return Returns true if the device is a Tablet
+     */
+    public boolean isTabletDevice(Context activityContext) {
+        // Verifies if the Generalized Size of the device is XLARGE to be
+        // considered a Tablet
+        boolean xlarge = ((activityContext.getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                Configuration.SCREENLAYOUT_SIZE_XLARGE);
+
+        // If XLarge, checks if the Generalized Density is at least MDPI
+        // (160dpi)
+        if (xlarge) {
+            DisplayMetrics metrics = new DisplayMetrics();
+            Activity activity = (Activity) activityContext;
+            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+            // MDPI=160, DEFAULT=160, DENSITY_HIGH=240, DENSITY_MEDIUM=160,
+            // DENSITY_TV=213, DENSITY_XHIGH=320
+            if (metrics.densityDpi == DisplayMetrics.DENSITY_DEFAULT
+                    || metrics.densityDpi == DisplayMetrics.DENSITY_HIGH
+                    || metrics.densityDpi == DisplayMetrics.DENSITY_MEDIUM
+                    || metrics.densityDpi == DisplayMetrics.DENSITY_TV
+                    || metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH) {
+
+                // Yes, this is a tablet!
+                return true;
+            }
+        }
+        // No, this is not a tablet!
+        return false;
+    }
+
+    /**
+     * thanks to http://stackoverflow.com/a/26584929/4630627
+     * @return isPlugged
+     */
+    public boolean isPlugged() {
+        boolean isPlugged= false;
+        Intent intent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        isPlugged = plugged == BatteryManager.BATTERY_PLUGGED_AC || plugged == BatteryManager.BATTERY_PLUGGED_USB;
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+            isPlugged = isPlugged || plugged == BatteryManager.BATTERY_PLUGGED_WIRELESS;
+        }
+        return isPlugged;
+    }
+
+    /**
+     *
+     * @return isDisabled
+     * @throws Exception
+     */
+    public boolean isLockScreenDisabled() throws Exception {
+        String LOCKSCREEN_UTILS = "com.android.internal.widget.LockPatternUtils";
+
+        Class<?> lockUtilsClass = Class.forName(LOCKSCREEN_UTILS);
+        // "this" is a Context, in my case an Activity
+        Object lockUtils = lockUtilsClass.getConstructor(Context.class).newInstance(context);
+        Method method = lockUtilsClass.getMethod("isLockScreenDisabled");
+        boolean isDisabled = Boolean.valueOf(String.valueOf(method.invoke(lockUtils)));
+        return isDisabled;
+
+    }
+
+    public static boolean checkBuildNumber(int number){
+        return android.os.Build.VERSION.SDK_INT >= number;
+    }
+
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
+    public String getDeviceId(){
+        ContentResolver contentResolver = context.getContentResolver();
+        if (contentResolver != null) {
+
+            String androidId = Settings.Secure.getString(contentResolver,
+                    Settings.Secure.ANDROID_ID);
+            return androidId;
+        }else{
+            return null;
+        }
+
+    }
+
+}
