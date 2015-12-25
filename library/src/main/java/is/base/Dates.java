@@ -55,7 +55,7 @@ public class Dates {
     /**
      * @return boolean
      */
-    public boolean todayIsWeekend(){
+    public boolean isTodayWeekend(){
         Calendar now = Calendar.getInstance();
         return isWeekend(now.getTime());
     }
@@ -63,7 +63,7 @@ public class Dates {
     /**
      * @return
      */
-    public boolean todayIsWeekday(){
+    public boolean isTodayWeekday(){
         Calendar now = Calendar.getInstance();
         return isWeekday(now.getTime());
     }
