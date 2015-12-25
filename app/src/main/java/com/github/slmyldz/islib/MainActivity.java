@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import is.Is;
 import is.IsApplication;
 
@@ -25,72 +27,95 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    Is getIs(){
-       return  ((IsApplication)getApplication()).getIs();
-    }
+   
 
 
     public void startTest(){
         text.setText("");
-        setText("isPackageInstalled : com.github.slmyldz.islib => " + getIs().getApplications().isPackageInstalled("com.github.slmyldz.islib"));
-        setText("isValidCreditCard : 4521235486213215 => " + getIs().getBasics().isValidCreditCard("4521235486213215"));
-        setText("isValidDomainName : www.google.com => " + getIs().getBasics().isValidDomainName("www.google.com"));
-        setText("isValidEmail : slmyldz41@gmail.com => " + getIs().getBasics().isValidEmail("slmyldz41@gmail.com"));
-        setText("isValidIPadress : 191.168.1.1 => " + getIs().getBasics().isValidIPadress("191.168.1.1"));
-        setText("isValidPhone : +90 888 88 88 => "+getIs().getBasics().isValidPhone("+90 888 88 88"));
-        setText("isValidURL : http://slmyldz.com => "+getIs().getBasics().isValidURL("http://slmyldz.com"));
-        //setText("isKeyboardVisible : => "+getIs().getKeyboard().isKeyboardVisible());
-        setText("isLocationEnabled : => "+getIs().getLocations().isLocationEnabled());
-        setText("isMobileDataEnabled : => "+getIs().getNetwork().isMobileDataEnabled());
-        setText("isNetworkEnabled : => "+getIs().getNetwork().isNetworkEnabled());
-        setText("isBrand : LG => "+getIs().getPhones().isBrand("LG"));
 
+        //application
+        setText("isPackageInstalled : com.github.slmyldz.islib " + Is.application.isPackageInstalled("com.github.slmyldz.islib"));
+        setText("getApplicationVersionNumber : =>" + Is.application.getApplicationVersionNumber());
+        setText("getApplicationVersionCode : =>" + Is.application.getApplicationVersionCode());
+
+        //basics
+        setText("isValidCreditCard : 4521235486213215 " + Is.basic.isValidCreditCard("4521235486213215"));
+        setText("isValidDomainName : www.google.com " + Is.basic.isValidDomainName("www.google.com"));
+        setText("isValidEmail : slmyldz41@gmail.com " + Is.basic.isValidEmail("slmyldz41@gmail.com"));
+        setText("isValidIPadress : 191.168.1.1 " + Is.basic.isValidIPadress("191.168.1.1"));
+        setText("isValidPhone : +90 888 88 88 " + Is.basic.isValidPhone("+90 888 88 88"));
+        setText("isValidURL : http://slmyldz.com " + Is.basic.isValidURL("http://slmyldz.com"));
+
+        //location
+        setText("isLocationEnabled : "+Is.location.isLocationEnabled());
+
+
+        //network
+        setText("isMobileDataEnabled : "+Is.network.isMobileDataEnabled());
+        setText("isNetworkEnabled : " + Is.network.isNetworkEnabled());
+        setText("getWifiState : "+ Is.network.getWifiState().name());
+
+        //phone
+        setText("isBrand : LG "+Is.phone.isBrand("LG"));
         try {
-            setText("isLockScreenDisabled : => "+getIs().getPhones().isLockScreenDisabled());
+            setText("isLockScreenDisabled : "+Is.phone.isLockScreenDisabled());
         } catch (Exception e) {
             e.printStackTrace();
         }
+        setText("isPlugged : "+Is.phone.isPlugged());
+        setText("checkBuildNumber : "+Is.phone.checkBuildNumber(15));
+        setText("isTabletDevice : Activity " + Is.phone.isTabletDevice(this));
+        setText("isAirplaneModeOpen : "+Is.phone.isAirplaneModeOpen());
+        setText("getMaxMemory :  "+Is.phone.getMaxMemory());
+        setText("getDeviceId : "+Is.phone.getDeviceId());
 
-        setText("isPlugged : => "+getIs().getPhones().isPlugged());
-        setText("isTabletDevice : Activity => "+getIs().getPhones().isTabletDevice(this));
-        setText("isRooted : => "+getIs().getRoot().isRooted());
-        setText("isScreenLandscape : => "+getIs().getScreen().isScreenLandscape());
-        setText("isScreenPortrait : => "+getIs().getScreen().isScreenPortrait());
-        setText("isScreenSquare : => "+getIs().getScreen().isScreenSquare());
-        setText("getScreenSizes : => "+"w:"+getIs().getScreen().getScreenSizes(this)[0]+" h:"+getIs().getScreen().getScreenSizes(this)[1]);
-        setText("isServiceRunning : com.android.vending => "+getIs().getServices().isServiceRunning("com.android.vending"));
-        setText("isMax : Sound => "+getIs().getSounds().isMax());
-        setText("isMute : Sound => "+getIs().getSounds().isMute());
-        setText("isAvailableSpace : 250 bytes => "+getIs().getSpace().isAvailableSpace(250));
-        setText("isAvailableSpace : 16*1024*1024*1024 bytes => "+getIs().getSpace().isAvailableSpace(16*1024*1024*1024));
-        setText("getAvailableSpaceInBytes : => "+getIs().getSpace().getAvailableSpaceInBytes());
-        setText("getAvailableSpaceInGB : => "+getIs().getSpace().getAvailableSpaceInGB());
-        setText("getAvailableSpaceInKB : => "+getIs().getSpace().getAvailableSpaceInKB());
-        setText("isVisible : text => "+getIs().getViews().isVisible(text));
-        setText("isGone : text => "+getIs().getViews().isGone(text));
-        setText("getDeviceId : => "+getIs().getPhones().getDeviceId());
-        setText("equalsViews : text,text => "+getIs().getViews().equalsViews(text, text));
+        //root
+        setText("isRooted : "+Is.root.isRooted());
+
+        //screen
+        setText("isScreenLandscape : " + Is.screen.isScreenLandscape());
+        setText("isScreenPortrait : " + Is.screen.isScreenPortrait());
+        setText("isScreenSquare : " + Is.screen.isScreenSquare());
+        setText("getScreenSizes : "+"w:"+Is.screen.getScreenSizes(this)[0]+" h:"+Is.screen.getScreenSizes(this)[1]);
+        setText("getScreenBrightness : " + Is.screen.getScreenBrightness());
+        setText("isScreenBrightnessModeAuto : " + Is.screen.isScreenBrightnessModeAuto());
+
+        //service
+        setText("isServiceRunning : com.android.vending " + Is.service.isServiceRunning("com.android.vending"));
+
+        //sound
+        setText("isMax : Sound "+Is.sound.isMax());
+        setText("isMute : Sound "+Is.sound.isMute());
+        setText("getMediaVolume : "+Is.sound.getMediaVolume());
+        setText("getRingVolume : "+Is.sound.getRingVolume());
+
+        //file
+        setText("getAvailableSpaceInBytes : " + Is.file.getAvailableSpaceInBytes());
+        setText("isSdCardMounted : " + Is.file.isSdCardMounted());
+        setText("isFileExistsInSDCard : \"hello.txt\",\"/sdcard/\"" + Is.file.isFileExistsInSDCard("hello.txt", "/sdcard/"));
+
+        //view
+        setText("isVisible : text "+Is.view.isVisible(text));
+        setText("isGone : text "+Is.view.isGone(text));
+
+        //date
+        setText("getCurrentDate : yyyy-MM-dd =>"+ Is.date.getCurrentDate("yyyy-MM-dd"));
+        setText("isToday : yyyy-MM-dd =>"+ Is.date.isToday(new Date()));
+        setText("isWeekday : yyyy-MM-dd =>"+ Is.date.isWeekday(new Date()));
+        setText("isWeekend : yyyy-MM-dd =>"+ Is.date.isWeekend(new Date()));
+        setText("getCurrentDateTimeStamp : yyyy-MM-dd =>"+ Is.date.getCurrentDateTimeStamp());
+        setText("todayIsWeekday : yyyy-MM-dd =>"+ Is.date.todayIsWeekday());
+        setText("todayIsWeekend : yyyy-MM-dd =>"+ Is.date.todayIsWeekend());
+
+
+
         transformToHtml();
     }
 
     public void setText(String output){
         int b =output.indexOf(':');
-
-        output = "<b>"+getBlankedString(output.substring(0,b))+"</b>"+output.substring(b)+"<br>";
-
+        output = "<b>"+output.substring(0,b)+"</b> => "+output.substring(b)+"<br>";
         text.setText(text.getText() + output + "\n");
-
-    }
-    String getBlankedString(String a){
-        return a.length()>= 20 ? a: a+getBlank(20-a.length()) ;
-    }
-
-    String getBlank(int a){
-        String blank="";
-        for(int i =0;i<a;i++){
-            blank = blank + " ";
-        }
-        return blank;
     }
 
     public void transformToHtml(){

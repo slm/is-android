@@ -10,8 +10,6 @@ import android.webkit.MimeTypeMap;
 
 import java.io.File;
 
-import is.BaseCheck;
-
 /**
  * Created by slmyldz on 22.12.2015.
  */
@@ -58,26 +56,9 @@ public class Files extends BaseCheck {
     }
 
     /**
-     * thanks to http://stackoverflow.com/a/9989440/4630627
-     * @return Number of gega bytes available on External storage
-     */
-    public long getAvailableSpaceInGB(){
-        final long SIZE_KB = 1024L;
-        final long SIZE_GB = SIZE_KB * SIZE_KB * SIZE_KB;
-        long availableSpace = -1L;
-        StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-        availableSpace = (long) stat.getAvailableBlocks() * (long) stat.getBlockSize();
-        return availableSpace/SIZE_GB;
-    }
-
-    public  boolean isAvailableSpace(int bytes){
-        return getAvailableSpaceInBytes()>bytes;
-    }
-
-    /**
      * @return boolean
      */
-    public static boolean isSdCardMounted() {
+    public boolean isSdCardMounted() {
         String status = Environment.getExternalStorageState();
 
         if (status.equals(Environment.MEDIA_MOUNTED))
@@ -102,7 +83,7 @@ public class Files extends BaseCheck {
      * @param fileName
      * @return
      */
-    public static boolean isFileExistsInSDCard(String filePath, String fileName) {
+    public boolean isFileExistsInSDCard(String filePath, String fileName) {
         boolean flag = false;
         if (isSdCardMounted()) {
             File file = new File(filePath, fileName);
@@ -124,6 +105,25 @@ public class Files extends BaseCheck {
         File dire = new File(directoryPath);
         return (dire.exists() && dire.isDirectory());
     }
+
+
+    /**
+     * Check file extension
+     * @param ext
+     * @param file
+     * @return
+     */
+    public boolean isFile(String ext,File file){
+        String fullPath = file.getAbsolutePath();
+        int dot = fullPath.lastIndexOf(".");
+        String ext1 = fullPath.substring(dot + 1);
+        if(ext1.equals(ext))
+        {
+            return true;
+        }
+        return false;
+    }
+
 
 
 

@@ -1,4 +1,4 @@
-package is.hardware;
+package is.base;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -10,22 +10,11 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.BatteryManager;
 import android.os.Build;
-import android.os.Debug;
-import android.os.Environment;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.regex.Pattern;
-
-import is.BaseCheck;
 
 /**
  * Created by slmyldz on 22.12.2015.
@@ -202,7 +191,7 @@ public class Phones extends BaseCheck{
     /**
      * @return long max memory
      */
-    public static long getMaxMemory() {
+    public long getMaxMemory() {
 
         return Runtime.getRuntime().maxMemory() / 1024;
     }

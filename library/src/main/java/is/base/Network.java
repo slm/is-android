@@ -1,4 +1,4 @@
-package is.network;
+package is.base;
 
 
 import android.annotation.TargetApi;
@@ -8,8 +8,6 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.provider.Settings;
 
-import is.BaseCheck;
-
 public class Network extends BaseCheck {
 
 
@@ -18,7 +16,7 @@ public class Network extends BaseCheck {
     }
 
     /**
-     *  If you want to use this method, you must got permission that <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+     *  If you want to use this method, got permission that <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
      * @return boolean
      */
     public boolean isNetworkEnabled(){
@@ -77,7 +75,7 @@ public class Network extends BaseCheck {
      *
      * @return ConnectivityManager.TYPE_*
      */
-    public static int getDataConnectionType(Context ctx) {
+    public int getDataConnectionType(Context ctx) {
 
         ConnectivityManager connMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
 

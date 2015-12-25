@@ -1,12 +1,9 @@
-package is.runtime;
+package is.base;
 
 import android.app.ActivityManager;
-import android.app.Application;
 import android.content.Context;
 
 import java.util.List;
-
-import is.BaseCheck;
 
 /**
  * Created by slmyldz on 22.12.2015.

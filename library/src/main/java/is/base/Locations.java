@@ -6,8 +6,6 @@ import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import is.BaseCheck;
-
 /**
  * Created by slmyldz on 22.12.2015.
  */
@@ -20,7 +18,6 @@ public class Locations extends BaseCheck{
 
     /**
      * thanks to http://stackoverflow.com/a/22980843/4630627
-
      * @return
      */
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
@@ -42,7 +39,9 @@ public class Locations extends BaseCheck{
             locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
             return !TextUtils.isEmpty(locationProviders);
         }
-
-
     }
+
+
+
+
 }

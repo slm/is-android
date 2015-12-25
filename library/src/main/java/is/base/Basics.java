@@ -5,10 +5,6 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Patterns;
 
-import java.io.File;
-
-import is.BaseCheck;
-
 /**
  * Created by slmyldz on 22.12.2015.
  */
@@ -116,25 +112,5 @@ public class Basics extends BaseCheck {
         }
         return (sum % 10 == 0);
     }
-
-
-    /**
-     * Check file extension
-     * @param ext
-     * @param file
-     * @return
-     */
-    public boolean isFile(String ext,File file){
-            String fullPath = file.getAbsolutePath();
-            int dot = fullPath.lastIndexOf(".");
-            String ext1 = fullPath.substring(dot + 1);
-            if(ext1.equals(ext))
-            {
-                return true;
-            }
-        return false;
-    }
-
-
 
 }

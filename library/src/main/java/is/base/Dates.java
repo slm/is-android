@@ -1,7 +1,9 @@
 package is.base;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by slmyldz on 22.12.2015.
@@ -26,18 +28,72 @@ public class Dates {
         return d.getTime();
     }
 
+
     /**
-     * @param timestamp
-     * @return boolean
+     * @param date
+     * @return
      */
-    public boolean isToday(long timestamp){
-        long diff = timestamp - getCurrentDateTimeStamp();
-        if(Math.abs(diff)> 24*60*60){
-            return false;
+    public boolean isToday(Date date){
+        long epochInMillis = date.getTime();
+        Calendar now = Calendar.getInstance();
+        Calendar timeToCheck = Calendar.getInstance();
+        timeToCheck.setTimeInMillis(epochInMillis);
+
+        if(now.get(Calendar.YEAR) == timeToCheck.get(Calendar.YEAR)) {
+            if(now.get(Calendar.DAY_OF_YEAR) == timeToCheck.get(Calendar.DAY_OF_YEAR)){
+                return true;
+            }else{
+                return false;
+            }
         }else{
-            return true;
+            return false;
         }
     }
+
+    /**
+     * @return boolean
+     */
+    public boolean todayIsWeekend(){
+        Calendar now = Calendar.getInstance();
+        return isWeekend(now.getTime());
+    }
+
+    /**
+     * @return
+     */
+    public boolean todayIsWeekday(){
+        Calendar now = Calendar.getInstance();
+        return isWeekday(now.getTime());
+    }
+
+    /**
+     * @param date
+     * @return
+     */
+    public boolean isWeekend(Date date){
+        long epochInMillis = date.getTime()*1000;
+        Calendar timeToCheck = Calendar.getInstance();
+        timeToCheck.setTimeInMillis(epochInMillis);
+        int day = timeToCheck.get(Calendar.DAY_OF_WEEK);
+        return day == Calendar.SUNDAY || day == Calendar.SATURDAY;
+    }
+
+    /**
+     * @param date
+     * @return
+     */
+    public boolean isWeekday(Date date){
+        long epochInMillis = date.getTime()*1000;
+        Calendar timeToCheck = Calendar.getInstance();
+        timeToCheck.setTimeInMillis(epochInMillis);
+        int day = timeToCheck.get(Calendar.DAY_OF_WEEK);
+        return day != Calendar.SUNDAY && day != Calendar.SATURDAY;
+    }
+
+
+
+
+
 
 
 

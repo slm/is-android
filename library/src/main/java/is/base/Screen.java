@@ -7,9 +7,6 @@ import android.graphics.Point;
 import android.provider.Settings;
 import android.view.Display;
 
-import is.BaseCheck;
-import is.hardware.Phones;
-
 /**
  * Created by slmyldz on 22.12.2015.
  */

@@ -1,10 +1,8 @@
-package is.security;
+package is.base;
 
 import android.content.Context;
 
 import java.io.File;
-
-import is.BaseCheck;
 
 /**
  * Created by slmyldz on 22.12.2015.

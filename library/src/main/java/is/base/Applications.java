@@ -2,9 +2,6 @@ package is.base;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v7.appcompat.BuildConfig;
-
-import is.BaseCheck;
 
 /**
  * Created by slmyldz on 22.12.2015.
@@ -17,7 +14,6 @@ public class Applications extends BaseCheck {
     }
 
     /**
-     *
      * @param packagename
      * @return
      */
@@ -32,7 +28,6 @@ public class Applications extends BaseCheck {
     }
 
     /**
-     *
      * @return application version number
      */
 
@@ -49,8 +44,6 @@ public class Applications extends BaseCheck {
     }
 
     /**
-     *
-     *
      * @return application version code
      */
     public int getApplicationVersionCode() {
@@ -64,13 +57,6 @@ public class Applications extends BaseCheck {
         }
 
         return versionCode;
-    }
-
-    /**
-     * @return boolean
-     */
-    public static boolean isDebug() {
-        return BuildConfig.DEBUG;
     }
 
 }

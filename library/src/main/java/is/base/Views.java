@@ -1,4 +1,4 @@
-package is.runtime;
+package is.base;
 
 
 import android.annotation.TargetApi;
@@ -7,8 +7,6 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.TextView;
-
-import is.BaseCheck;
 
 /**
  * Created by slmyldz on 22.12.2015.
@@ -63,19 +61,6 @@ public class Views extends BaseCheck {
      */
     public boolean isGone(View view){
         return view.getVisibility()==View.GONE;
-    }
-
-    /**
-     * @param v1
-     * @param v2
-     * @return
-     */
-    public boolean equalsViews(View v1,View v2){
-        if(v1.getId()==v2.getId()){
-            return true;
-        }else{
-            return false;
-        }
     }
 
     /**

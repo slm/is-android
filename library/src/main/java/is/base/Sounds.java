@@ -1,10 +1,7 @@
-package is.sound;
+package is.base;
 
 import android.content.Context;
 import android.media.AudioManager;
-import android.provider.Settings;
-
-import is.BaseCheck;
 
 /**
  * Created by slmyldz on 22.12.2015.

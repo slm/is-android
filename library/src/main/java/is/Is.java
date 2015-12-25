@@ -4,99 +4,54 @@ import android.content.Context;
 
 import is.base.Applications;
 import is.base.Basics;
+import is.base.Dates;
 import is.base.Keyboard;
 import is.base.Locations;
 import is.base.Screen;
 import is.base.Files;
-import is.hardware.Phones;
-import is.network.Network;
-import is.runtime.Services;
-import is.runtime.Views;
-import is.security.Root;
-import is.sound.Sounds;
+import is.base.Phones;
+import is.base.Network;
+import is.base.Services;
+import is.base.Views;
+import is.base.Root;
+import is.base.Sounds;
 
 /**
  * Created by slmyldz on 22.12.2015.
  */
 public class Is {
 
-    Is getIs(Context context){
-        return new Is(context);
-    }
+    private static Context ctx;
 
-    Applications applications;
-    Basics basics;
-    Keyboard keyboard;
-    Locations locations;
-    Screen screen;
-    Files space;
-    Phones phones;
-    Network network;
-    Services services;
-    Views views;
-    Root root;
-    Sounds sounds;
+    public static Applications application;
+    public static Basics basic;
+    public static Keyboard keyboard;
+    public static Locations location;
+    public static Screen screen;
+    public static Files file;
+    public static Phones phone;
+    public static Network network;
+    public static Services service;
+    public static Views view;
+    public static Root root;
+    public static Sounds sound;
+    public static Dates date;
 
-    public Is(Context context){
-        applications = new Applications(context);
-        basics = new Basics(context);
-        locations = new Locations(context);
+
+    public static void init(Context context){
+        ctx = context;
+        application = new Applications(context);
+        basic = new Basics(context);
+        location = new Locations(context);
         screen = new Screen(context);
-        space = new Files(context);
-        phones = new Phones(context);
+        file = new Files(context);
+        phone = new Phones(context);
         network = new Network(context);
-        services = new Services(context);
-        views = new Views(context);
+        service = new Services(context);
+        view  = new Views(context);
         root = new Root(context);
-        sounds = new Sounds(context);
-    }
-
-    public Applications getApplications() {
-        return applications;
-    }
-
-    public Basics getBasics() {
-        return basics;
-    }
-
-    public Keyboard getKeyboard() {
-        return keyboard;
-    }
-
-    public Locations getLocations() {
-        return locations;
-    }
-
-    public Screen getScreen() {
-        return screen;
-    }
-
-    public Files getSpace() {
-        return space;
-    }
-
-    public Phones getPhones() {
-        return phones;
-    }
-
-    public Network getNetwork() {
-        return network;
-    }
-
-    public Services getServices() {
-        return services;
-    }
-
-    public Views getViews() {
-        return views;
-    }
-
-    public Root getRoot() {
-        return root;
-    }
-
-    public Sounds getSounds() {
-        return sounds;
+        sound = new Sounds(context);
+        date = new Dates();
     }
 
 }

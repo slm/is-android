@@ -7,20 +7,11 @@ import android.app.Application;
  */
 public class IsApplication extends Application {
 
-    Is ıs;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        ıs = new Is(this);
-    }
-
-    /**
-     * you can call Is object from Activity  ((IsApplication) getApplicaton()).getIs();
-     * @return Is
-     */
-    public Is getIs() {
-        return ıs;
+        Is.init(this);
     }
 
 }
