@@ -35,9 +35,11 @@ public class Dates {
      */
     public boolean isToday(Date date){
         long epochInMillis = date.getTime();
-        Calendar now = Calendar.getInstance();
         Calendar timeToCheck = Calendar.getInstance();
         timeToCheck.setTimeInMillis(epochInMillis);
+
+        Calendar now = Calendar.getInstance();
+        now.setTime(new Date());
 
         if(now.get(Calendar.YEAR) == timeToCheck.get(Calendar.YEAR)) {
             if(now.get(Calendar.DAY_OF_YEAR) == timeToCheck.get(Calendar.DAY_OF_YEAR)){

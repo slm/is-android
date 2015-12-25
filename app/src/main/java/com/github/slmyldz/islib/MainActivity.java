@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         //file
         setText("getAvailableSpaceInBytes : " + Is.file.getAvailableSpaceInBytes());
         setText("isSdCardMounted : " + Is.file.isSdCardMounted());
-        setText("isFileExistsInSDCard : \"hello.txt\",\"/sdcard/\"" + Is.file.isFileExistsInSDCard("hello.txt", "/sdcard/"));
+        setText("isFileExistsInSDCard \"hello.txt\",\"/sdcard/\" : " + Is.file.isFileExistsInSDCard("hello.txt", "/sdcard/"));
 
         //view
         setText("isVisible : text "+Is.view.isVisible(text));
@@ -100,9 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
         //date
         setText("getCurrentDate : yyyy-MM-dd =>"+ Is.date.getCurrentDate("yyyy-MM-dd"));
-        setText("isToday : yyyy-MM-dd =>"+ Is.date.isToday(new Date()));
-        setText("isWeekday : yyyy-MM-dd =>"+ Is.date.isWeekday(new Date()));
-        setText("isWeekend : yyyy-MM-dd =>"+ Is.date.isWeekend(new Date()));
+        setText("isToday : =>"+ Is.date.isToday(new Date()));
+        setText("isWeekday : =>"+ Is.date.isWeekday(new Date()));
+        setText("isWeekend : =>"+ Is.date.isWeekend(new Date()));
         setText("getCurrentDateTimeStamp : yyyy-MM-dd =>"+ Is.date.getCurrentDateTimeStamp());
         setText("todayIsWeekday : yyyy-MM-dd =>"+ Is.date.todayIsWeekday());
         setText("todayIsWeekend : yyyy-MM-dd =>"+ Is.date.todayIsWeekend());
