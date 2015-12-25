@@ -104,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
         setText("isWeekday : =>"+ Is.date.isWeekday(new Date()));
         setText("isWeekend : =>"+ Is.date.isWeekend(new Date()));
         setText("getCurrentDateTimeStamp : yyyy-MM-dd =>"+ Is.date.getCurrentDateTimeStamp());
-        setText("todayIsWeekday : yyyy-MM-dd =>"+ Is.date.todayIsWeekday());
-        setText("todayIsWeekend : yyyy-MM-dd =>"+ Is.date.todayIsWeekend());
+        setText("todayIsWeekday : =>"+ Is.date.todayIsWeekday());
+        setText("todayIsWeekend : =>"+ Is.date.todayIsWeekend());
 
 
 
